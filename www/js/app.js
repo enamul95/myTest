@@ -88,7 +88,7 @@ angular.module('starter', ['ionic', 'ngCordova'])
         // $rootScope.db1 = $cordovaSQLite.openDB({ name: "my.db", bgType: 1 });
         // $cordovaSQLite.execute(  $rootScope.db1, "CREATE TABLE IF NOT EXISTS people (firstname text, lastname text)");
         
-        	if (window.cordova) {
+        	if (window.cordova && window.cordova.plugins.sqliteplugin) {
         		alert("device");
       db = $cordovaSQLite.openDB({ name: "my.db" }); //device
        $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS people (firstname text, lastname text)");
