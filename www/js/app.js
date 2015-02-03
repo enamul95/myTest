@@ -84,8 +84,8 @@ angular.module('starter', ['ionic', 'ngCordova'])
 		
 		//alert("db under");	
 			  //db.transaction((tx) {})
-             window.openDatabase({ name: "my.db" });
-         $rootScope.db1 = window.openDatabase({ name: "my.db", bgType: 1 });
+             $cordovaSQLite.openDB({ name: "my.db" });
+         $rootScope.db1 = $cordovaSQLite.openDB({ name: "my.db", bgType: 1 });
          $cordovaSQLite.execute(  $rootScope.db1, "CREATE TABLE IF NOT EXISTS people (firstname text, lastname text)");
         });
     });
