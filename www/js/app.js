@@ -29,7 +29,12 @@ angular.module('starter', ['ionic', 'ngCordova'])
     $urlRouterProvider.otherwise("/signin");
 })
 
-.controller('SignInCtrl', function($scope, $state, $http,$cordovaSQLite,$location) {
+.controller('SignInCtrl', function($scope, $state, $http,$cordovaSQLite,$location, $ionicPlatform) {
+//	 $ionicPlatform.ready() {
+        // All your plugin calls here
+         //db = window.openDatabase({ name: "my.db", bgType: 1 });
+        //$cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS people (id integer primary key, firstname text, lastname text)");
+    //}
 
   $scope.insert = function() {
   alert("Call Method"+ db);
@@ -74,11 +79,11 @@ angular.module('starter', ['ionic', 'ngCordova'])
                 StatusBar.styleDefault();
             }
 			//SQLite database
-			db = $cordovaSQLite.openDB("my.db", 1);
+		//	db = $cordovaSQLite.openDB("my.db", 1);
 		
-		alert("db under");	
+		//alert("db under");	
 			  //db.transaction((tx) {})
-            //db = $cordovaSQLite.openDB({ name: "my.db" });
-           $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS people (id integer primary key, firstname text, lastname text)");
+            db = window.openDatabase({ name: "my.db" });
+          $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS people (id integer primary key, firstname text, lastname text)");
         });
     });
