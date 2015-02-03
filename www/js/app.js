@@ -32,7 +32,7 @@ angular.module('starter', ['ionic', 'ngCordova'])
 .controller('SignInCtrl', function($scope, $state, $http,$cordovaSQLite,$location) {
 
   $scope.insert = function() {
-  alert("Call Method");
+  alert("Call Method"+ db);
         var query = "INSERT INTO people (firstname, lastname) VALUES (?,?)";
         $cordovaSQLite.execute(db, query, ['Enamul', 'Haque']).then(function(res) {
 		 alert("Insert Method");
@@ -44,7 +44,7 @@ angular.module('starter', ['ionic', 'ngCordova'])
     }
  
     $scope.select = function() {
-	 alert("Call Method");
+	 alert("Call Method"+db);
         var query = "SELECT firstname, lastname FROM people ";
         $cordovaSQLite.execute(db, query).then(function(res) {
             if(res.rows.length > 0) {
@@ -66,6 +66,7 @@ angular.module('starter', ['ionic', 'ngCordova'])
    .run(function($ionicPlatform, $cordovaSQLite) {
   // alert("dddd");
         $ionicPlatform.ready(function() {
+        		alert("ready");
             if(window.cordova && window.cordova.plugins.Keyboard) {
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
             }
@@ -75,7 +76,7 @@ angular.module('starter', ['ionic', 'ngCordova'])
 			//SQLite database
 			db = $cordovaSQLite.openDB("my.db", 1);
 		
-			
+		alert("db under");	
 			  //db.transaction((tx) {})
             //db = $cordovaSQLite.openDB({ name: "my.db" });
            $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS people (id integer primary key, firstname text, lastname text)");
