@@ -29,7 +29,7 @@ angular.module('starter', ['ionic', 'ngCordova'])
     $urlRouterProvider.otherwise("/signin");
 })
 
-.controller('SignInCtrl', function($scope, $state, $http,$cordovaSQLite,$location, $ionicPlatform) {
+.controller('SignInCtrl', function($scope, $state, $http,$cordovaSQLite,$location, $rootScope) {
 	// $ionicPlatform.ready() {
         // All your plugin calls here
         //window.openDatabase({ name: "my.db" });
