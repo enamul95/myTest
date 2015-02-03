@@ -38,9 +38,9 @@ angular.module('starter', ['ionic', 'ngCordova'])
     //}
 
   $scope.insert = function() {
-  alert("Call Method"+  $rootScope.db1);
+  alert("Call Method"+db);
         var query = "INSERT INTO people (firstname, lastname) VALUES (?,?)";
-        $cordovaSQLite.execute(  $rootScope.db1, query, ['Enamul', 'Haque']).then(function(res) {
+        $cordovaSQLite.execute(db, query, ['Enamul', 'Haque']).then(function(res) {
 		 alert("Insert Method");
             console.log("INSERT ID -> " + res.insertId);
         }, function (err) {
@@ -50,9 +50,9 @@ angular.module('starter', ['ionic', 'ngCordova'])
     }
  
     $scope.select = function() {
-	 alert("Call Method"+  $rootScope.db1);
+	 alert("Call Method"+db);
         var query = "SELECT firstname, lastname FROM people ";
-        $cordovaSQLite.execute(  $rootScope.db1, query).then(function(res) {
+        $cordovaSQLite.execute(db, query).then(function(res) {
             if(res.rows.length > 0) {
 			 alert("Select Method");
                 console.log("SELECTED -> " + res.rows.item(0).firstname + " " + res.rows.item(0).lastname);
@@ -84,8 +84,19 @@ angular.module('starter', ['ionic', 'ngCordova'])
 		
 		//alert("db under");	
 			  //db.transaction((tx) {})
-             $cordovaSQLite.openDB({ name: "my.db" });
-         $rootScope.db1 = $cordovaSQLite.openDB({ name: "my.db", bgType: 1 });
-         $cordovaSQLite.execute(  $rootScope.db1, "CREATE TABLE IF NOT EXISTS people (firstname text, lastname text)");
+            // $cordovaSQLite.openDB({ name: "my.db" });
+        // $rootScope.db1 = $cordovaSQLite.openDB({ name: "my.db", bgType: 1 });
+        // $cordovaSQLite.execute(  $rootScope.db1, "CREATE TABLE IF NOT EXISTS people (firstname text, lastname text)");
+        
+        	if (window.cordova) {
+        		alert("device");
+      db = $cordovaSQLite.openDB({ name: "my.db" }); //device
+       $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS people (firstname text, lastname text)");
+    }else{
+	alert("browser");
+      db = window.openDatabase("my.db", '1', 'my', 1024 * 1024 * 100); // browser
+      
+    }
+		
         });
     });
