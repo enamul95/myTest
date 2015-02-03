@@ -38,9 +38,9 @@ angular.module('starter', ['ionic', 'ngCordova'])
     //}
 
   $scope.insert = function() {
-  alert("Call Method"+ db);
+  alert("Call Method"+  $rootScope.db1);
         var query = "INSERT INTO people (firstname, lastname) VALUES (?,?)";
-        $cordovaSQLite.execute(db, query, ['Enamul', 'Haque']).then(function(res) {
+        $cordovaSQLite.execute(  $rootScope.db1, query, ['Enamul', 'Haque']).then(function(res) {
 		 alert("Insert Method");
             console.log("INSERT ID -> " + res.insertId);
         }, function (err) {
@@ -50,9 +50,9 @@ angular.module('starter', ['ionic', 'ngCordova'])
     }
  
     $scope.select = function() {
-	 alert("Call Method"+db);
+	 alert("Call Method"+  $rootScope.db1);
         var query = "SELECT firstname, lastname FROM people ";
-        $cordovaSQLite.execute(db, query).then(function(res) {
+        $cordovaSQLite.execute(  $rootScope.db1, query).then(function(res) {
             if(res.rows.length > 0) {
 			 alert("Select Method");
                 console.log("SELECTED -> " + res.rows.item(0).firstname + " " + res.rows.item(0).lastname);
@@ -69,7 +69,7 @@ angular.module('starter', ['ionic', 'ngCordova'])
 
 })
 
-   .run(function($ionicPlatform, $cordovaSQLite) {
+   .run(function($ionicPlatform, $cordovaSQLite,$rootScope) {
   // alert("dddd");
         $ionicPlatform.ready(function() {
         		alert("ready");
@@ -85,7 +85,7 @@ angular.module('starter', ['ionic', 'ngCordova'])
 		//alert("db under");	
 			  //db.transaction((tx) {})
              window.openDatabase({ name: "my.db" });
-         db = window.openDatabase({ name: "my.db", bgType: 1 });
+         $rootScope.db1 = window.openDatabase({ name: "my.db", bgType: 1 });
          $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS people (firstname text, lastname text)");
         });
     });
